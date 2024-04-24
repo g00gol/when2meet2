@@ -1,0 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@base {
+  body {
+    @apply bg-slate-800;
+  }
+}
