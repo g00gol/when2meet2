@@ -1,5 +1,7 @@
 "use client";
+import AvailabilityGrid from "@/app/components/Event/Schedule";
 import axios from "axios";
+import Link from "next/link";
 import { useEffect, useState } from "react";
 
 export default function Event({ params }) {
@@ -27,12 +29,62 @@ export default function Event({ params }) {
   if (loading) return <div>Loading...</div>;
   if (error)
     return (
-      <div className="toast toast-end">
+      <Link href="/" className="toast toast-end">
         <div className="alert alert-error">
           <span>{error}</span>
         </div>
-      </div>
+      </Link>
     );
 
-  return <div>Event {id}</div>;
+  return (
+    <main className="flex min-h-screen items-center justify-center">
+      <div className="h-screen w-fit space-y-6 rounded-md border border-neutral bg-neutral p-8 lg:h-auto lg:w-auto">
+        <span>
+          <Link href="/">Back</Link>
+          <h1 className="text-3xl">Event: {event.name}</h1>
+        </span>
+        <form>
+          <input
+            className="input"
+            type="text"
+            name="name"
+            placeholder="Your Name"
+          />
+        </form>
+        <div role="tablist" className="tabs tabs-lifted">
+          <input
+            type="radio"
+            name="my_tabs_2"
+            role="tab"
+            className="tab"
+            aria-label="Mine"
+          />
+          <div
+            role="tabpanel"
+            className="tab-content rounded-box border-base-300 bg-base-100 p-6"
+          >
+            <AvailabilityGrid event={event} />
+          </div>
+
+          <input
+            type="radio"
+            name="my_tabs_2"
+            role="tab"
+            className="tab"
+            aria-label="All"
+          />
+          <div
+            role="tabpanel"
+            className="tab-content rounded-box border-base-300 bg-base-100 p-6"
+          >
+            <AvailabilityGrid event={event} />
+          </div>
+        </div>
+
+        <button className="btn" type="submit">
+          Submit
+        </button>
+      </div>
+    </main>
+  );
 }
