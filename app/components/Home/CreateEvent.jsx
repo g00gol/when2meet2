@@ -14,28 +14,24 @@ export default function CreateEvent() {
     <form
       method="POST"
       action="/api/event"
-      className="flex w-fit flex-col space-y-6 rounded-md border border-neutral bg-neutral p-8"
+      className="flex h-screen w-screen flex-col space-y-6 rounded-md border border-neutral bg-neutral p-8 lg:h-auto lg:w-fit"
     >
-      <span className="space-x-2">
-        <label>
-          <input
-            className="input"
-            type="text"
-            name="name"
-            placeholder="Event Name"
-          />
-        </label>
-        <label>
-          <select
-            name="meeting_pattern"
-            className="select"
-            onChange={(e) => handleMeetingPatternChange(e)}
-            value={meetingPattern}
-          >
-            <option value="week">Week</option>
-            <option value="month">Month</option>
-          </select>
-        </label>
+      <span className="space-y-2 lg:space-x-2">
+        <input
+          className="input"
+          type="text"
+          name="name"
+          placeholder="Event Name"
+        />
+        <select
+          name="meeting_pattern"
+          className="select"
+          onChange={(e) => handleMeetingPatternChange(e)}
+          value={meetingPattern}
+        >
+          <option value="week">Week</option>
+          <option value="month">Month</option>
+        </select>
       </span>
       {meetingPattern === "week" ? (
         <Week selectedDays={selectedDays} setSelectedDays={setSelectedDays} />
